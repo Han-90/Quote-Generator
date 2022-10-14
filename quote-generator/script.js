@@ -42,6 +42,10 @@ function newQuote() {
 
     quoteText.textContent = quote.text;
 
+    // Set Quote, Hide Loader
+    quoteText.textContent = quote.text;
+    notLoading();
+
 
 }
 
