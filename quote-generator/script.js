@@ -3,9 +3,21 @@ const quoteText = document.getElementById('quote');
 const authorText = document.getElementById('author');
 const twitterBtn = document.getElementById('twitter');
 const newQuoteBtn = document.getElementById('new-quote');
+const loader = document.getElementById('loader');
 
 
 let apiQuotes = [];
+// Show Loading
+function loading() {
+    loader.hidden = false;
+    quoteContainer.hidden = true;
+}
+// Hide Loading
+function notLoading() {
+    loader.hidden = true;
+    quoteContainer.hidden = false;
+}
+
 // Show New Quote
 function newQuote() {
     loading();
@@ -30,6 +42,10 @@ function newQuote() {
 
     quoteText.textContent = quote.text;
 
+    // Set Quote, Hide Loader
+    quoteText.textContent = quote.text;
+    notLoading();
+
 
 }
 
@@ -44,5 +60,14 @@ async function getQuotes() {
     } catch (error) {
         // Catch Error Here
     }
+    //  Tweet Quote
+    function tweetQuote() {
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${authorText.textContent}`;
+        window.open(twitterUrl, '_blank');
+    }
+
+    // Event Listeners
+    newQuoteBtn.addEventListener('click', newQuote);
+    twitterBtn.addEventListener('click', tweetQuote);
 } // On Load
 getQuotes();
